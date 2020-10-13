@@ -1,51 +1,46 @@
-FROM 2dii/system:latest
+FROM 2dii/system
 MAINTAINER "Mauro Lepore" maurolepore@gmail.com
 
 # This repository has binaries for Linux
-RUN echo "options(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/bionic/latest'))" >> ~/.Rprofile \
+RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> ~/.Rprofile \
+  && echo 'options(HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))' >> ~/.Rprofile \
     # update-dockerfile-packages-start
     && Rscript -e "install.packages( \
              c( \
-               'conflicted', \
                'assertthat', \
+               'bookdown', \
                'config', \
+               'conflicted', \
                'countrycode', \
-               'cowplot', \
-               'devtools', \
                'data.table', \
+               'devtools', \
                'dplyr', \
-               'extrafont', \
                'fs', \
                'fst', \
-               'ggforce', \
-               'ggmap', \
                'ggplot2', \
-               'ggrepel', \
-               'ggthemes', \
                'glue', \
-               'gridExtra', \
                'here', \
+               'janitor', \
                'jsonlite', \
                'knitr', \
-               'lme4', \
-               'matrixStats', \
-               'RColorBrewer', \
+               'purrr', \
+               'readr', \
                'readxl', \
                'renv', \
                'reshape2', \
                'rlang', \
-               'rworldmap', \
+               'rmarkdown', \
+               'rstudioapi', \
                'scales', \
-               'sitools', \
                'stringr', \
                'testthat', \
+               'tibble', \
                'tidyr', \
                'tidyselect', \
-               'tidyverse', \
-               'writexl', \
                'usethis', \
                'withr', \
-               'xml2' \
+               'writexl', \
+               'zoo' \
              ) \
            )" \
     # update-dockerfile-packages-end
