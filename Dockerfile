@@ -19,10 +19,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
        libssl-dev \
        libpng-dev \
        libjpeg-dev \
-       pandoc \
        texlive \
        texlive-latex-extra && \
     apt-get clean
+
+RUN echo "install.packages(c('countrycode', 'data.table', 'dplyr', 'devtools', 'extrafont', 'fst', 'ggmap', 'ggplot2', 'ggthemes', 'gridExtra', 'here', 'knitr', 'mapproj', 'matrixStats', 'lme4', 'RColorBrewer', 'readxl', 'renv', 'reshape2', 'rworldmap', 'scales', 'stringr', 'tibble', 'tidyr', 'tidyverse', 'writexl', 'zoo'), repos='https://cloud.r-project.org')" > /tmp/tmp_install.R && \
+    echo 'devtools::install_github("2DegreesInvesting/r2dii")' >> /tmp/tmp_install.R && \
+    Rscript --vanilla /tmp/tmp_install.R && \
+    rm /tmp/tmp_install.R
 
 # NOTE:
 # Unclear on licensing problems when including this font in a repo.
