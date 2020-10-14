@@ -20,7 +20,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
        libpng-dev \
        libjpeg-dev \
        libssh2-1-dev \
-       pandoc \
        texlive \
        texlive-latex-extra && \
     apt-get clean
