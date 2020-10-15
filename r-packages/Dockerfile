@@ -15,6 +15,7 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
                'data.table', \
                'devtools', \
                'dplyr', \
+               'forcats', \
                'fs', \
                'fst', \
                'ggplot2', \
