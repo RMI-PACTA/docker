@@ -20,6 +20,7 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
                'fst', \
                'ggplot2', \
                'glue', \
+               'highcharter', \
                'here', \
                'janitor', \
                'jsonlite', \
