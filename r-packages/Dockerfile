@@ -23,6 +23,7 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
                'here', \
                'janitor', \
                'jsonlite', \
+               'highcharter', \
                'knitr', \
                'purrr', \
                'readr', \
