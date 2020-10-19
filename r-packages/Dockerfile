@@ -12,6 +12,7 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
                'config', \
                'conflicted', \
                'countrycode', \
+               'crayon', \
                'data.table', \
                'devtools', \
                'dplyr', \
@@ -47,5 +48,3 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
            )" \
     # update-dockerfile-packages-end
     && echo ""
-
-#
