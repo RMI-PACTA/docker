@@ -31,6 +31,7 @@ RUN echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__lin
                'renv', \
                'reshape2', \
                'rlang', \
+               'rmarkdown', \
                'rstudioapi', \
                'scales', \
                'stringr', \
