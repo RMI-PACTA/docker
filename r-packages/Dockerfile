@@ -49,5 +49,5 @@ RUN apt-get install -y wget \
            )" \
     # update-dockerfile-packages-end
     && Rscript -e "tinytex::install_tinytex()" \
-    && Rscript -e 'tinytex::tlmgr_install(pkgs = c("mathspec", "sectsty", "sourcesanspro", "wrapfig", "fancyhdr", "xcolor"))' \
+    && Rscript -e 'tinytex::tlmgr_install(pkgs = c("caption", "mathspec", "sectsty", "sourcesanspro", "wrapfig", "fancyhdr", "xcolor"))' \
     && echo ""
