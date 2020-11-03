@@ -10,6 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get -y install \
+       git \
        build-essential \
        r-base \
        texlive-luatex \
