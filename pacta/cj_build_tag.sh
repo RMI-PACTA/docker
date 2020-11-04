@@ -12,6 +12,16 @@ rm -rf pacta-data
 
 unzip pacta_web_template.zip
 
+git clone -b master git@github.com:2DegreesInvesting/user_results.git --depth 1
+rm -rf user_results/.git
+rm user_results/.gitignore
+rm user_results/.DS_Store
+rm user_results/README.md
+rm user_results/user_results.Rproj
+
+cp -R user_results/ pacta_web/user_results/4/
+rm -rf user_results
+
 docker save 2dii_pacta | gzip > pacta_web/2dii_pacta.tar.gz
 
 zip -r pacta_web.zip pacta_web -x ".DS_Store" -x "__MACOSX"
