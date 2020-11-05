@@ -1,0 +1,22 @@
+#! /bin/bash
+
+tag="$1"
+repos="$2"
+
+
+for repo in ${repos}
+do
+    origin="$(git -C ${repo} remote get-url origin)"
+    read -p "Are you sure you want to push $tag to ${origin}? " -n 1 -r
+    echo    # move to a new line
+
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        # do dangerous stuff
+        # FIXME
+        #  git push origin "${tag}"
+        echo "Do nothing for now"
+    fi
+done
+
+exit 0
