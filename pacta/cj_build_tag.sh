@@ -1,3 +1,5 @@
+#! /bin/bash
+
 clones="PACTA_analysis create_interactive_report StressTestingModelDev pacta-data"
 url="git@github.com:2DegreesInvesting/"
 tag="${1:-latest}"
