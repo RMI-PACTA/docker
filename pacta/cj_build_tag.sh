@@ -3,6 +3,7 @@ git clone -b master git@github.com:2DegreesInvesting/create_interactive_report.g
 git clone -b master git@github.com:2DegreesInvesting/StressTestingModelDev.git --depth 1
 git clone -b master git@github.com:2DegreesInvesting/pacta-data.git --depth 1
 
+docker rmi 2dii_pacta
 docker build ./ --tag 2dii_pacta:"${1:-latest}"
 
 rm -rf PACTA_analysis
