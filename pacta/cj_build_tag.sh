@@ -40,11 +40,11 @@ git clone -b master "${url}"user_results.git --depth 1
 echo "user_results HEAD sha:"
 git -C user_results rev-parse HEAD
 
-rm -rf user_results/.git
-rm user_results/.gitignore
-rm user_results/.DS_Store
-rm user_results/README.md
-rm user_results/user_results.Rproj
+needless_files=".git .gitignore .DS_Store README.md user_results.Rproj"
+for file in ${needless_files}
+do
+  rm -rf user_results/"${file}"
+done
 
 cp -R user_results/ pacta_web/user_results/4/
 rm -rf user_results
