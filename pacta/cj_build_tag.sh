@@ -1,8 +1,8 @@
 #! /bin/bash
 
-clones="PACTA_analysis create_interactive_report StressTestingModelDev pacta-data"
-url="git@github.com:2DegreesInvesting/"
 tag="${1:-latest}"
+clones="${2:-PACTA_analysis create_interactive_report StressTestingModelDev pacta-data}"
+url="git@github.com:2DegreesInvesting/"
 
 for repo in ${clones}
 do
