@@ -1,28 +1,31 @@
-git clone -b master git@github.com:2DegreesInvesting/PACTA_analysis.git --depth 1
-git clone -b master git@github.com:2DegreesInvesting/create_interactive_report.git --depth 1
-git clone -b master git@github.com:2DegreesInvesting/StressTestingModelDev.git --depth 1
-git clone -b master git@github.com:2DegreesInvesting/pacta-data.git --depth 1
+clones="PACTA_analysis create_interactive_report StressTestingModelDev pacta-data"
+url="git@github.com:2DegreesInvesting/"
 
-echo "PACTA_analysis HEAD sha:"
-git -C PACTA_analysis rev-parse HEAD
-echo "create_interactive_report HEAD sha:"
-git -C create_interactive_report rev-parse HEAD
-echo "StressTestingModelDev HEAD sha:"
-git -C StressTestingModelDev rev-parse HEAD
-echo "pacta-data HEAD sha:"
-git -C pacta-data rev-parse HEAD
+for repo in ${clones}
+do
+    remote="${url}${repo}.git"
+    git clone -b master ${remote} --depth 1
+    echo "--"
+done
+
+for repo in ${clones}
+do
+    echo "${repo} HEAD sha:"
+    git -C "${repo}" rev-parse HEAD
+    echo "--"
+done
 
 docker rmi 2dii_pacta
 docker build ./ --tag 2dii_pacta:"${1:-latest}"
 
-rm -rf PACTA_analysis
-rm -rf create_interactive_report
-rm -rf StressTestingModelDev
-rm -rf pacta-data
+for repo in ${clones}
+do
+    rm -rf "${repo}"
+done
 
 unzip pacta_web_template.zip
 
-git clone -b master git@github.com:2DegreesInvesting/user_results.git --depth 1
+git clone -b master "${url}"user_results.git --depth 1
 echo "user_results HEAD sha:"
 git -C user_results rev-parse HEAD
 
