@@ -1,5 +1,6 @@
 clones="PACTA_analysis create_interactive_report StressTestingModelDev pacta-data"
 url="git@github.com:2DegreesInvesting/"
+tag="${1:-latest}"
 
 for repo in ${clones}
 do
@@ -16,7 +17,7 @@ do
 done
 
 docker rmi 2dii_pacta
-docker build ./ --tag 2dii_pacta:"${1:-latest}"
+docker build ./ --tag 2dii_pacta:"${tag}"
 
 for repo in ${clones}
 do
