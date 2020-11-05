@@ -18,6 +18,14 @@ do
     echo "--"
 done
 
+for repo in ${clones}
+do
+    git -C "${repo}" tag -a "${tag}" -m "Release pacta ${tag}" HEAD
+    echo "${repo}"
+    echo "$(git -C ${repo} log --pretty='%h %d <%an> (%cr)' | head -n 1)"
+    echo "--"
+done
+
 docker rmi 2dii_pacta
 docker build ./ --tag 2dii_pacta:"${tag}"
 
