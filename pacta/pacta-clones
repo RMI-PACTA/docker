@@ -1,0 +1,7 @@
+#! /bin/bash
+
+echo "\
+    PACTA_analysis \
+    create_interactive_report \
+    pacta-data \
+    StressTestingModelDev"
