@@ -46,3 +46,5 @@ docker save 2dii_pacta | gzip > pacta_web/2dii_pacta.tar.gz
 zip -r pacta_web.zip pacta_web -x ".DS_Store" -x "__MACOSX"
 
 rm -rf pacta_web
+
+exit 0
