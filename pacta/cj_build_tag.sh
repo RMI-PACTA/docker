@@ -26,8 +26,8 @@ do
     echo "--"
 done
 
-docker rmi 2dii_pacta
 docker build ./ --tag 2dii_pacta:"${tag}"
+docker rmi --force $(docker images -q '2dii_pacta' | uniq)
 
 for repo in ${clones}
 do
