@@ -27,7 +27,7 @@ do
 done
 
 docker rmi --force $(docker images -q '2dii_pacta' | uniq)
-docker build --tag 2dii_pacta:"${tag}" --tag 2dii_pacta:latest
+docker build --tag 2dii_pacta:"${tag}" --tag 2dii_pacta:latest .
 
 for repo in ${clones}
 do
