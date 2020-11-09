@@ -6,4 +6,13 @@ COPY create_interactive_report /create_interactive_report
 COPY pacta-data /pacta-data
 COPY StressTestingModelDev /StressTestingModelDev
 
+RUN chmod -R a+rwX /bound
+RUN chmod -R a+rwX /create_interactive_report
+RUN chmod -R a+rwX /pacta-data
+RUN chmod -R a+rwX /StressTestingModelDev
+
+RUN echo "options(tinytex.tlmgr.path = '/root/.TinyTeX/bin/x86_64-linux/tlmgr')" > .Rprofile
+RUN chmod -R a+rwX /root
+RUN /root/.TinyTeX/bin/*/tlmgr path add
+
 RUN exit 0

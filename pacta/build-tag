@@ -1,4 +1,0 @@
-#! /bin/bash
-
-cp Dockerfile ../../
-docker build ../../ --tag 2dii/pacta:"${1:-latest}"
