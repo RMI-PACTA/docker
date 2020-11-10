@@ -37,16 +37,16 @@ The script will:
   - an export of the freshly made docker image gzipped (2dii_pacta.tar.gz)
   - a few scripts and directories that contain sample data to facilitate testing the new image
 
-If the build is succesful, one should test it with the test scripts, and if the tests are successful, load the image interactively and commit the tags created for each of the PACTA_analysis and friends repos inside of the docker container.
+If the build is succesful, one should test it with the test scripts, and if the tests are successful, load the image interactively and push the tags created for each of the PACTA_analysis and friends repos inside of the docker container.
 
 
 # For the web
 
 
-that shared docker image can be loaded into the new machine with...
+That shared docker image can be loaded into the new machine with...
 ```docker load --input 2dii_pacta.tar.gz```
 
-the docker image can then be used as intended with a script such as...
+The docker image can then be used as intended with a script such as...
 ```
 working_dir="$(pwd)"/working_dir
 user_results="$(pwd)"/user_results
@@ -54,7 +54,7 @@ user_results="$(pwd)"/user_results
 docker run --rm -ti \
   --mount type=bind,source="$working_dir",target=/bound/working_dir \
   --mount type=bind,source="$user_results",target=/user_results \
-  2dii/pacta \
+  2dii_pacta \
   /bound/bin/run-r-scripts
 ```
-where you set `working_dir` to the path to the directory that contains the user specific portfolio info on the server, and you set `user_results` to the path to the directory that contains the survey etc. results that are relevant to the specific user on the server... those directories will then be mounted inside of the docker containter in the appropriate locations.
+where you set `working_dir` to the path to the directory that contains the user specific portfolio info on the server, and you set `user_results` to the path to the directory that contains the survey (and other) results that are relevant to the specific user on the server. Those directories will then be mounted inside of the docker containter in the appropriate locations.
