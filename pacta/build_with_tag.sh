@@ -69,7 +69,9 @@ do
     rm -rf "$repo"
 done
 
-unzip pacta_web_template.zip
+web_template_zip="pacta_web_template.zip"
+echo "Unzipping $web_template_zip ..."
+unzip -q "$web_template_zip"
 echo
 
 repos="$user_results"
@@ -85,10 +87,14 @@ done
 cp -R user_results/ pacta_web/user_results/4/
 rm -rf user_results
 
-docker save 2dii_pacta | gzip > pacta_web/2dii_pacta.tar.gz
+image_tar_gz="pacta_web/2dii_pacta.tar.gz"
+echo "Saving 2dii_pacta into $image_tar_gz ..."
+docker save 2dii_pacta | gzip -q > "$image_tar_gz"
 echo
 
-zip -r pacta_web.zip pacta_web -x ".DS_Store" -x "__MACOSX"
+web_zip="pacta_web.zip"
+echo "Zipping $web_zip ..."
+zip -rq "$web_zip" pacta_web -x ".DS_Store" -x "__MACOSX"
 
 rm -rf pacta_web
 
