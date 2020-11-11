@@ -15,6 +15,14 @@
 # # You may want to cleanup, particularly if the process ends early.
 # git clean -dffx
 
+red () {
+    printf "\033[31m${1}\033[0m\n"
+}
+
+green () {
+    printf "\033[32m${1}\033[0m\n"
+}
+
 user_results="user_results"
 url="git@github.com:2DegreesInvesting/"
 tag="$1"
@@ -26,14 +34,14 @@ fi
 
 if [ -z "$tag" ]
 then
-    echo "Please give a tag."
+    red "Please give a tag."
     exit 2
 fi
 
 here="$(basename $(pwd))"
 if [ ! "$here" == "pacta" ]
 then
-    echo "Please run from 2diidockerrunner/pacta (not $(pwd))"
+    red "Please run from 2diidockerrunner/pacta (not $(pwd))."
     exit 2
 fi
 
@@ -46,12 +54,12 @@ clone_and_log () {
 
         if [ -n "$tag" ]
         then
-            echo "Tagging as $tag"
+            green "Tagging as $tag"
             git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
             echo
         fi
-
-        echo "$(git -C $repo log --pretty='%h %d <%an> (%cr)' | head -n 1)"
+        
+        green "$(git -C $repo log --pretty='%h %d <%an> (%cr)' | head -n 1)"
         echo
     done
 }
@@ -70,7 +78,7 @@ do
 done
 
 web_template_zip="pacta_web_template.zip"
-echo "Unzipping $web_template_zip ..."
+green "Unzipping $web_template_zip ..."
 unzip -q "$web_template_zip"
 echo
 
@@ -88,15 +96,15 @@ cp -R user_results/ pacta_web/user_results/4/
 rm -rf user_results
 
 image_tar_gz="pacta_web/2dii_pacta.tar.gz"
-echo "Saving 2dii_pacta into $image_tar_gz ..."
+green "Saving 2dii_pacta into $image_tar_gz ..."
 docker save 2dii_pacta | gzip -q > "$image_tar_gz"
 echo
 
 web_zip="pacta_web.zip"
-echo "Zipping $web_zip ..."
+green "Zipping $web_zip ..."
 zip -rq "$web_zip" pacta_web -x ".DS_Store" -x "__MACOSX"
 
 rm -rf pacta_web
 
-echo "Done"
+green "Done :-)"
 exit 0
