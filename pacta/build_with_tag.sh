@@ -45,26 +45,25 @@ then
     exit 2
 fi
 
-clone_and_log () {
-    for repo in $repos
-    do
-        remote="${url}${repo}.git"
-        git clone -b master "$remote" --depth 1 || exit 2
+for repo in $repos
+do
+    # Clone
+    remote="${url}${repo}.git"
+    git clone -b master "$remote" --depth 1 || exit 2
+    echo
+    
+    # Tag
+    if [ -n "$tag" ]
+    then
+        green "Tagging as $tag"
+        git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
         echo
+    fi
 
-        if [ -n "$tag" ]
-        then
-            green "Tagging as $tag"
-            git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
-            echo
-        fi
-        
-        green "$(git -C $repo log --pretty='%h %d <%an> (%cr)' | head -n 1)"
-        echo
-    done
-}
-
-clone_and_log
+    # Log
+    green "$(git -C $repo log --pretty='%h %d <%an> (%cr)' | head -n 1)"
+    echo
+done
 
 docker rmi --force $(docker images -q '2dii_pacta' | uniq)
 echo
