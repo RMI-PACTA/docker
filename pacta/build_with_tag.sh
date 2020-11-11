@@ -82,19 +82,6 @@ green "Unzipping $web_template_zip ..."
 unzip -q "$web_template_zip"
 echo
 
-repos="$user_results"
-tag=""
-clone_and_log
-
-needless_files=".git .gitignore .DS_Store README.md user_results.Rproj"
-for file in $needless_files
-do
-  rm -rf user_results/"$file"
-done
-
-cp -R user_results/ pacta_web/user_results/4/
-rm -rf user_results
-
 image_tar_gz="pacta_web/2dii_pacta.tar.gz"
 green "Saving 2dii_pacta into $image_tar_gz ..."
 docker save 2dii_pacta | gzip -q > "$image_tar_gz"
