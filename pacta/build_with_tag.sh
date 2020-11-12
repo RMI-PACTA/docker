@@ -71,7 +71,8 @@ done
 docker rmi --force $(docker images -q '2dii_pacta' | uniq)
 echo
 
-docker build --tag 2dii_pacta:"$tag" --tag 2dii_pacta:latest .
+parent="$(dirname $(which $0))"
+docker build --tag 2dii_pacta:"$tag" --tag 2dii_pacta:latest "$parent"
 echo
 
 for repo in $repos
