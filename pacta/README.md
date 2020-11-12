@@ -44,9 +44,28 @@ If the build is successful, load the image interactively and push the tags
 created for each of the PACTA_analysis and friends repos inside of the
 docker container.
 
+# Releasing
+
+To release a new version of the software, push all tags to GitHub. The tag you provide will affect the image, the repository containing the dockerfile that builds the image, and the pacta siblings. That consistent tag make the process reproducible.
+
+To push the tags, start the container with something like
+
+```bash
+cd ~
+docker run --rm -ti -v "$(pwd)/.ssh":/root/.ssh 2dii_pacta:latest
+```
+
+This example starts an ephemeral container (`run --rm`) from the image `2dii_pacta:latest`, and creates a volume that makes your .ssh key available to the container (`-v "$(pwd)/.ssh":/bound/.ssh`), which you'll need to interact with GitHub. If instead of ssh you use https protocol, you may omit the volume argument and provide your username and password when prompted.
+
+Once inside the container, you can push any tag as you would normally push a branch `git push <remote> <tag>`, for example:
+
+```bash
+cd /bound
+# If origin = https://github.com/2DegreesInvesting/PACTA_analysis
+git push origin 0.0.4
+```
 
 # For the web
-
 
 That shared docker image can be loaded into the new machine with...
 
