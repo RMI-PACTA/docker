@@ -38,17 +38,27 @@ then
     exit 2
 fi
 
+# Clone
 for repo in $repos
 do
-    # Clone
     remote="${url}${repo}.git"
     git clone -b master "$remote" --depth 1 || exit 2
     echo
+done
 
-    # Tag
+parent="$(dirname $(which $0))"
+if [ "$parent" == "." ]
+then
+    parent="$(pwd)"
+fi
+
+repos_and_this_repo="$repos $(dirname $parent)"
+for repo in $repos_and_this_repo
+do
     if [ -n "$tag" ]
+    # Tag
     then
-        green "Tagging as $tag"
+        green "Tagging $(basename $repo) with $tag"
         git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
         echo
     fi
@@ -69,7 +79,6 @@ do
     rm -rf "$repo"
 done
 
-parent="$(dirname $(which $0))"
 image_tar_gz="${parent}/2dii_pacta.tar.gz"
 green "Saving 2dii_pacta into $image_tar_gz ..."
 docker save 2dii_pacta | gzip -q > "$image_tar_gz"
