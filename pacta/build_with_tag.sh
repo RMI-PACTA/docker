@@ -83,15 +83,9 @@ cd $dir_start
 
 
 
-parent="$(dirname $(which $0))"
-if [ "$parent" == "." ]
-then
-    parent="$(pwd)"
-fi
-this_repo="$(dirname $parent)"
-
 # Tag and log
-green "Tagging $(basename $this_repo) with $tag"
+green "Tagging $(basename $(pwd)) with $tag"
+git tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
 echo
 green "$(git log --pretty='%h %d <%an> (%cr)' | head -n 1)"
 echo
