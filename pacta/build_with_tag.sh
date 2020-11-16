@@ -38,6 +38,23 @@ then
     exit 2
 fi
 
+parent="$(dirname $(which $0))"
+if [ "$parent" == "." ]
+then
+    parent="$(pwd)"
+fi
+
+this_repo="$(dirname $parent)"
+existing_tags="$(git -C $this_repo tag)"
+for i in $existing_tags
+do
+    if [ "$i" == "$tag" ]
+    then
+        red "'$tag' already exists in $this_repo."
+        red "Do you need 'git tag --delete $tag'?" && exit 1
+    fi
+done
+
 # Clone
 for repo in $repos
 do
@@ -46,20 +63,19 @@ do
     echo
 done
 
-parent="$(dirname $(which $0))"
-if [ "$parent" == "." ]
-then
-    parent="$(pwd)"
-fi
-
-repos_and_this_repo="$repos $(dirname $parent)"
+repos_and_this_repo="$repos $this_repo"
+echo $repos_and_this_repo
 for repo in $repos_and_this_repo
 do
     if [ -n "$tag" ]
     # Tag
     then
         green "Tagging $(basename $repo) with $tag"
-        git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
+        git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD
+        if [[ "$?" -gt 0 ]]
+        then
+            red "Do you need 'git tag --delete $tag'?" && exit 1
+        fi
         echo
     fi
 
