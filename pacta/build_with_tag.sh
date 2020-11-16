@@ -47,6 +47,16 @@ then
     exit 2
 fi
 
+existing_tags="$(git tag)"
+for i in $existing_tags
+do
+    if [ "$i" == "$tag" ]
+    then
+        red "'$tag' already exists in $this_repo."
+        red "Do you need 'git tag --delete $tag'?" && exit 1
+    fi
+done
+
 
 
 
