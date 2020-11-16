@@ -42,7 +42,8 @@ fi
 for repo in $repos
 do
     remote="${url}${repo}.git"
-    git clone -b master "$remote" --depth 1 || exit 2
+    git clone -b master "$remote" --depth 1 || \
+        red "Do you need 'git clean -idff' (maybe twice)?" && exit 2
     echo
 done
 
