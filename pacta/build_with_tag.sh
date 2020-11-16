@@ -23,6 +23,15 @@ green () {
     printf "\033[32m${1}\033[0m\n"
 }
 
+dir_start="$(pwd)"
+dir_temp="$(mktemp -d)"
+cleanup () {
+  green "The pacta repositories were cloned into: $dir_temp'"
+  green "You may cleanup with 'rm -rf $dir_temp'"
+  cd $dir_start
+}
+trap cleanup EXIT
+
 user_results="user_results"
 url="git@github.com:2DegreesInvesting/"
 tag="$1"
@@ -38,7 +47,12 @@ then
     exit 2
 fi
 
-# Clone
+
+
+
+
+
+cd $dir_temp
 for repo in $repos
 do
     remote="${url}${repo}.git"
@@ -46,41 +60,37 @@ do
     echo
 done
 
-parent="$(dirname $(which $0))"
-if [ "$parent" == "." ]
-then
-    parent="$(pwd)"
-fi
-
-repos_and_this_repo="$repos $(dirname $parent)"
-for repo in $repos_and_this_repo
+# Tag and log
+for repo in $repos
 do
-    if [ -n "$tag" ]
-    # Tag
-    then
-        green "Tagging $(basename $repo) with $tag"
-        git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
-        echo
-    fi
+    green "Tagging $(basename $repo) with $tag"
+    git -C "$repo" tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
+    echo
 
-    # Log
     green "$(git -C $repo log --pretty='%h %d <%an> (%cr)' | head -n 1)"
     echo
 done
 
-docker rmi --force $(docker images -q '2dii_pacta' | uniq)
+# Copy Dockerfile alongside pacta siblings and build the image
+cp "${dir_start}/Dockerfile" "$dir_temp"
+docker build --tag 2dii_pacta:"$tag" --tag 2dii_pacta:latest .
 echo
 
-parent="$(dirname $(which $0))"
-docker build --tag 2dii_pacta:"$tag" --tag 2dii_pacta:latest "$parent"
+cd $dir_start
+
+
+
+
+
+
+# Tag and log
+green "Tagging $(basename $(pwd)) with $tag"
+git tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
+echo
+green "$(git log --pretty='%h %d <%an> (%cr)' | head -n 1)"
 echo
 
-for repo in $repos
-do
-    rm -rf "$repo"
-done
-
-image_tar_gz="${parent}/2dii_pacta.tar.gz"
+image_tar_gz="2dii_pacta.tar.gz"
 green "Saving 2dii_pacta into $image_tar_gz ..."
 docker save 2dii_pacta | gzip -q > "$image_tar_gz"
 echo
