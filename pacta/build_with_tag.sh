@@ -47,6 +47,12 @@ then
     exit 2
 fi
 
+wd="$(basename $dir_start)"
+if [ ! "$wd" == "pacta" ]
+then
+    red "Your current working directory is not 'pacta': $dir_start" && exit 1
+fi
+
 
 
 
