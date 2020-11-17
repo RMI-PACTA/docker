@@ -47,6 +47,12 @@ then
     exit 2
 fi
 
+existing_images="$(docker images -q '2dii_pacta')"
+if [ -n "$existing_images" ]
+then
+    red "Please remove existing docker images matching '2dii_pacta'." && exit 1
+fi
+
 wd="$(basename $dir_start)"
 if [ ! "$wd" == "pacta" ]
 then
