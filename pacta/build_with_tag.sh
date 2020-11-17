@@ -62,6 +62,11 @@ then
     red "E.g.: Remove '2dii_pacta:latest' with: docker rmi 2dii_pacta:latest" && exit 1
 fi
 
+if [ "$dir_start" == "." ]
+then
+    dir_start="$(pwd)"
+fi
+
 wd="$(basename $dir_start)"
 if [ ! "$wd" == "pacta" ]
 then
