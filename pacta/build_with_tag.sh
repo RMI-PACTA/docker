@@ -11,9 +11,6 @@
 # # of pacta siblings -- it's enough to know the path to the parent.
 # pacta_siblings="$(basename $(pacta-find ~/git))"
 # ./build_with_tag.sh 0.0.0.999 "$pacta_siblings"
-#
-# # You may want to cleanup, particularly if the process ends early.
-# git clean -dffx
 
 red () {
     printf "\033[31m${1}\033[0m\n"
