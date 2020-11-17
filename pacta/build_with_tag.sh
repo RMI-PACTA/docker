@@ -53,14 +53,16 @@ do
     if [ "$i" == "$tag" ]
     then
         red "'$tag' already exists in $this_repo."
-        red "Do you need 'git tag --delete $tag'?" && exit 1
+        red "You may delete it with: git tag --delete $tag" && exit 1
     fi
 done
 
 existing_images="$(docker images -q '2dii_pacta')"
 if [ -n "$existing_images" ]
 then
-    red "Please remove existing docker images matching '2dii_pacta'." && exit 1
+    red "Existing docker images match '2dii_pacta':"
+    docker images 2dii_pacta
+    red "E.g.: Remove '2dii_pacta:latest' with: docker rmi 2dii_pacta:latest" && exit 1
 fi
 
 wd="$(basename $dir_start)"
