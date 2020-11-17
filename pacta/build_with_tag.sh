@@ -53,6 +53,17 @@ then
     red "Please remove existing docker images matching '2dii_pacta'." && exit 1
 fi
 
+wd="$(basename $dir_start)"
+if [ ! "$wd" == "pacta" ]
+then
+    red "Your current working directory is not 'pacta': $dir_start" && exit 1
+fi
+
+
+
+
+
+
 cd $dir_temp
 for repo in $repos
 do
