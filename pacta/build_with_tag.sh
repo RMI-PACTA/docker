@@ -54,7 +54,7 @@ do
     fi
 done
 
-existing_images="$(docker images -q '2dii_pacta')"
+existing_images="$(docker images -q '2dii_pacta' || exit 1)"
 if [ -n "$existing_images" ]
 then
     red "Existing docker images match '2dii_pacta':"
