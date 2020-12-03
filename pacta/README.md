@@ -97,22 +97,26 @@ You should also push the same tag that has been created in your local
 
 That shared docker image can be loaded into the new machine with...
 
-`docker load --input 2dii_pacta.tar.gz`
+``` {.bash}
+docker load --input 2dii_pacta.tar.gz
+```
 
 The docker image can then be used as intended with a script such as...
 
-    portfolio_name="TestPortfolio"
-    working_dir="$(pwd)"/working_dir
-    user_results="$(pwd)"/user_results
+``` {.bash}
+portfolio_name="TestPortfolio"
+working_dir="$(pwd)"/working_dir
+user_results="$(pwd)"/user_results
 
-    docker run --rm -ti \
-      --network none \
-      --user 1000:1000 \
-      --memory="4g" \
-      --mount type=bind,source="$working_dir",target=/bound/working_dir \
-      --mount type=bind,source="$user_results",target=/user_results \
-      2dii_pacta \
-      /bound/bin/run-r-scripts "$portfolio_name"
+docker run --rm -ti \
+  --network none \
+  --user 1000:1000 \
+  --memory="4g" \
+  --mount type=bind,source="$working_dir",target=/bound/working_dir \
+  --mount type=bind,source="$user_results",target=/user_results \
+  2dii_pacta \
+  /bound/bin/run-r-scripts "$portfolio_name"
+```
 
 where you set `working_dir` to the path to the directory that contains
 the user specific portfolio info on the server, and you set
