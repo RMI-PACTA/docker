@@ -1,7 +1,7 @@
 # Description
 
 The Dockerfile in this directory creates an image containing a freshly
-cloned copies of PACTA_analysis and all the repositories it depends on.
+cloned copy of PACTA_analysis and all the repositories it depends on.
 
 The tree of the docker container looks like this:
 
