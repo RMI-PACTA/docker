@@ -54,7 +54,12 @@ do
     fi
 done
 
-existing_images="$(docker images -q '2dii_pacta')"
+if (! docker images > /dev/null 2>&1 )
+then
+  red "The docker daemon does not appear to be running." && exit 1
+fi
+
+existing_images="$(docker images -q '2dii_pacta' || exit 1)"
 if [ -n "$existing_images" ]
 then
     red "Existing docker images match '2dii_pacta':"
