@@ -115,7 +115,7 @@ cd $dir_start
 
 
 # Tag and log
-green "Tagging $(basename $(dirname $(pwd))) with $tag"
+green "Tagging docker with $tag"
 git tag -a "$tag" -m "Release pacta $tag" HEAD || exit 2
 echo
 green "$(git log --pretty='%h %d <%an> (%cr)' | head -n 1)"
