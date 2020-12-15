@@ -22,7 +22,7 @@ the image.
 
 Before running the script, you will need to remove any existing
 2dii_pacta docker images that are loaded. You can do that, for instance,
-with `docker rmi 2dii_pacta`.
+with `docker rmi --force $(docker images -q '2dii_pacta' | uniq)`.
 
 Also before running the script, you will need to choose the tag that you
 want to use for the release. You should use [semantic
