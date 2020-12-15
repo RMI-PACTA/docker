@@ -121,7 +121,7 @@ echo
 green "$(git log --pretty='%h %d <%an> (%cr)' | head -n 1)"
 echo
 
-image_tar_gz="2dii_pacta.tar.gz"
+image_tar_gz="2dii_pacta_v$tag.tar.gz"
 green "Saving 2dii_pacta into $image_tar_gz ..."
 docker save 2dii_pacta | gzip -q > "$image_tar_gz"
 echo
