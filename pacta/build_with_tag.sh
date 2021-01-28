@@ -49,8 +49,9 @@ for i in $existing_tags
 do
     if [ "$i" == "$tag" ]
     then
-        red "'$tag' already exists in $this_repo."
-        red "You may delete it with: git tag --delete $tag" && exit 1
+        toplevel="$(basename $(git rev-parse --show-toplevel))"
+        red "Tag '$tag' already exists in the repository $toplevel/."
+        red "You may delete it with: git tag --delete $tag." && exit 1
     fi
 done
 
