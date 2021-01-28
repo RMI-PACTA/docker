@@ -43,14 +43,21 @@ then
     exit 2
 fi
 
-existing_tags="$(git tag)"
-for i in $existing_tags
+remotes="$(echo $repos | tr ' ' ',')"
+remotes=$(eval "echo $url{$remotes}.git")
+tags=""
+for i in $remotes
+do
+    tags_i="$(git ls-remote --tags --ref $i | cut -d / -f 3)"
+    tags="$tags $tags_i"
+done
+tags="$(echo $tags | tr ' ' '\n' | sort -V | uniq)"
+for i in $tags
 do
     if [ "$i" == "$tag" ]
     then
-        toplevel="$(basename $(git rev-parse --show-toplevel))"
-        red "Tag '$tag' already exists in the repository $toplevel."
-        red "You may delete it with: git tag --delete $tag." && exit 1
+        red "Tag '$tag' is taken. Choose a new tag different from these ones:"
+        red "$(echo $tags | tr ' ' '\n' | sort -V | uniq)" && exit 1
     fi
 done
 
