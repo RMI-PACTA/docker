@@ -100,21 +100,17 @@ The docker image can then be used as intended with a script such as...
 ``` {.bash}
 portfolio_name="TestPortfolio"
 working_dir="$(pwd)"/working_dir
-user_results="$(pwd)"/user_results
 
 docker run --rm -ti \
   --network none \
   --user 1000:1000 \
   --memory="4g" \
   --mount type=bind,source="$working_dir",target=/bound/working_dir \
-  --mount type=bind,source="$user_results",target=/user_results \
+  --mount type=bind \
   2dii_pacta \
   /bound/bin/run-r-scripts "$portfolio_name"
 ```
 
-where you set `working_dir` to the path to the directory that contains
-the user specific portfolio info on the server, and you set
-`user_results` to the path to the directory that contains the survey
-(and other) results that are relevant to the specific user on the
-server. Those directories will then be mounted inside of the docker
-container in the appropriate locations.
+where you set `working_dir` to the path to the directory that contains the user
+specific portfolio info on the server. That directory will then be mounted
+inside of the docker container in the appropriate location.
