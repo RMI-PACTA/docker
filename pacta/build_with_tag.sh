@@ -29,7 +29,6 @@ cleanup () {
 }
 trap cleanup EXIT
 
-user_results="user_results"
 url="git@github.com:2DegreesInvesting/"
 tag="$1"
 repos="${@:2}"
