@@ -50,7 +50,7 @@ do
     if [ "$i" == "$tag" ]
     then
         toplevel="$(basename $(git rev-parse --show-toplevel))"
-        red "Tag '$tag' already exists in the repository $toplevel/."
+        red "Tag '$tag' already exists in the repository $toplevel."
         red "You may delete it with: git tag --delete $tag." && exit 1
     fi
 done
