@@ -16,6 +16,10 @@ red () {
     printf "\033[31m${1}\033[0m\n"
 }
 
+yellow () {
+    printf "\033[33m${1}\033[0m\n"
+}
+
 green () {
     printf "\033[32m${1}\033[0m\n"
 }
@@ -60,6 +64,12 @@ do
         red "$(echo $tags | tr ' ' '\n' | sort -V | uniq)" && exit 1
     fi
 done
+if [ -z "$tags" ]
+then
+    yellow "These remotes returned no tag:"
+    yellow "$(echo $remotes | tr ' ' '\n')"
+    yellow "Are your SSH keys unset?"
+fi
 
 if (! docker images > /dev/null 2>&1 )
 then
