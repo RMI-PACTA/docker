@@ -30,6 +30,8 @@ cleanup () {
 trap cleanup EXIT
 
 url="git@github.com:2DegreesInvesting/"
+[ ! -d ~/.ssh ] && red "SSH keys are unset" && exit 1
+
 tag="$1"
 repos="${@:2}"
 if [ -z "$repos" ]
