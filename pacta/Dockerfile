@@ -11,6 +11,8 @@ RUN chmod -R a+rwX /create_interactive_report
 RUN chmod -R a+rwX /pacta-data
 RUN chmod -R a+rwX /StressTestingModelDev
 
+RUN Rscript -e 'update.packages(ask = FALSE)'
+
 RUN echo "options(tinytex.tlmgr.path = '/root/.TinyTeX/bin/x86_64-linux/tlmgr')" > .Rprofile
 RUN chmod -R a+rwX /root
 RUN /root/.TinyTeX/bin/*/tlmgr path add
