@@ -46,6 +46,12 @@ then
     exit 2
 fi
 
+ssh -T git@github.com
+if [ $? -ne 1 ];
+then
+  red "You must have SSH authentication to GitHub setup properly to use this tool." && exit 1
+fi
+
 remotes="$(echo $repos | tr ' ' ',')"
 remotes=$(eval "echo $url{$remotes}.git")
 tags=""
