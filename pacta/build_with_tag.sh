@@ -27,8 +27,7 @@ green () {
 dir_start="$(pwd)"
 dir_temp="$(mktemp -d)"
 cleanup () {
-  green "A temporary directory was created at: $dir_temp"
-  green "You may remove it with: rm -rf $dir_temp"
+  rm -rf $dir_temp
   cd $dir_start
 }
 trap cleanup EXIT
