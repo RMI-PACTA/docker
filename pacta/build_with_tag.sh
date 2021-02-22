@@ -55,6 +55,11 @@ do
     tags_i="$(git ls-remote --tags --ref $i | cut -d / -f 3)"
     tags="$tags $tags_i"
 done
+
+# add tags from the current local docker git repo
+tags_i="$(git tag)"
+tags="$tags $tags_i"
+
 tags="$(echo $tags | tr ' ' '\n' | sort -V | uniq)"
 for i in $tags
 do
