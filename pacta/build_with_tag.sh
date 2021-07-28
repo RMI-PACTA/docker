@@ -5,7 +5,7 @@
 # build_with_tag 0.0.0.999
 #
 # # Optionally give the names of the repos as trailing arguments
-# build_with_tag 0.0.0.999 PACTA_analysis StressTestingModelDev
+# build_with_tag 0.0.0.999 PACTA_analysis r2dii.climate.stress.test
 #
 # # With the help of pacta-find, you don't need to know the names
 # # of pacta siblings -- it's enough to know the path to the parent.
@@ -37,7 +37,7 @@ tag="$1"
 repos="${@:2}"
 if [ -z "$repos" ]
 then
-    repos="PACTA_analysis create_interactive_report StressTestingModelDev pacta-data"
+    repos="PACTA_analysis create_interactive_report r2dii.climate.stress.test r2dii.stress.test.data pacta-data"
 fi
 
 if [ -z "$tag" ]

@@ -34,7 +34,8 @@ and friends repos. You can see existing tags in the relevant repos
 here:\
 <https://github.com/2DegreesInvesting/PACTA_analysis/tags>\
 <https://github.com/2DegreesInvesting/create_interactive_report/tags>\
-<https://github.com/2DegreesInvesting/StressTestingModelDev/tags>\
+<https://github.com/2DegreesInvesting/r2dii.climate.stress.test/tags>\
+<https://github.com/2DegreesInvesting/r2dii.stress.test.data/tags>\
 <https://github.com/2DegreesInvesting/pacta-data/tags>\
 <https://github.com/2DegreesInvesting/docker/tags>
 
