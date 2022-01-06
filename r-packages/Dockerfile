@@ -10,6 +10,7 @@ RUN apt-get install -y wget \
              c( \
                'assertthat', \
                'bookdown', \
+               'cli', \
                'config', \
                'conflicted', \
                'countrycode', \
@@ -42,6 +43,8 @@ RUN apt-get install -y wget \
                'tidyr', \
                'tidyselect', \
                'usethis', \
+               'vroom', \
+               'wand', \
                'withr', \
                'writexl', \
                'zoo' \
